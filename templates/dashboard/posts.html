@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row">
+{% include 'dashboard/sidebar.html' %}
+<div class="col-md-9">
+    <h3>Add New Post</h3>
+    <a href="{% url 'add_post' %}" class="btn btn-dark text-light float-right mb-2">Add New</a>
+    <table class="table table-hover">
+    <thead>
+    <tr>
+    <th scope="col">S.No</th>
+    <th scope="col">Title</th>
+    <th scope="col">Category</th>
+    <th scope="col">Auther</th>
+    <th scope="col">Status</th>
+    <th scope="col">Featured</th>
+    <th scope="col">Action</th>
+
+    </tr>
+    <tbody>
+        {% for post in posts %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{post.title}}</td>
+            <td>{{post.category}}</td>
+            <td>{{post.author}}</td>
+            <td>{{post.status}}</td>
+            <td>{{post.is_featured}}</td>
+            <td>
+            <a class="btn btn-primary btn-sm" href="{% url 'edit_post' post.id %}"><i class="fa fa-pencil text-white"></i></a>
+            </td>
+            &nbsp;
+            <td>
+            <a class="btn btn-danger btn-sm " href="{% url 'delete_post' post.id %}"><i class="fa fa-trash text-white"></i></a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    </thead>
+    </table>
+</div>
+</div>
+{% endblock %}
